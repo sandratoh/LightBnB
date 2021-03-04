@@ -111,6 +111,7 @@ const getAllProperties = function(options, limit = 10) {
   JOIN property_reviews ON properties.id = property_id
   `;
 
+  let clause;
   // 3
   if (options.city) {
     queryParams.push(`%${options.city}%`);
@@ -119,38 +120,26 @@ const getAllProperties = function(options, limit = 10) {
 
   if (options.owner_id) {
     queryParams.push(`%${options.owner_id}%`);
-    if (queryParams.length === 1) {
-      queryString += `WHERE owner_id LIKE $${queryParams.length} `;
-    } else {
-      queryString += `AND owner_id LIKE $${queryParams.length} `;
-    }
+    queryParams.length === 1 ? clause = 'WHERE' : clause = 'AND';
+    queryString += `${clause} owner_id LIKE $${queryParams.length} `;
   }
 
   if (options.minimum_price_per_night) {
     queryParams.push(`${options.minimum_price_per_night}`);
-    if (queryParams.length === 1) {
-      queryString += `WHERE cost_per_night >= $${queryParams.length} `;
-    } else {
-      queryString += `AND cost_per_night >= $${queryParams.length} `;
-    }
+    queryParams.length === 1 ? clause = 'WHERE' : clause = 'AND';
+    queryString += `${clause} cost_per_night >= $${queryParams.length} `;
   }
 
   if (options.maximum_price_per_night) {
     queryParams.push(`${options.maximum_price_per_night}`);
-    if (queryParams.length === 1) {
-      queryString += `WHERE cost_per_night <= $${queryParams.length} `;
-    } else {
-      queryString += `AND cost_per_night <= $${queryParams.length} `;
-    }
+    queryParams.length === 1 ? clause = 'WHERE' : clause = 'AND';
+    queryString += `${clause} cost_per_night <= $${queryParams.length} `;
   }
   
   if (options.minimum_rating) {
     queryParams.push(`${options.minimum_rating}`);
-    if (queryParams.length === 1) {
-      queryString += `WHERE rating >= $${queryParams.length} `;
-    } else {
-      queryString += `AND rating >= $${queryParams.length} `;
-    }
+    queryParams.length === 1 ? clause = 'WHERE' : clause = 'AND';
+    queryString += `${clause} rating >= $${queryParams.length} `;
   }
 
   // 4
