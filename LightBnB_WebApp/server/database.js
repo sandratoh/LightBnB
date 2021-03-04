@@ -112,6 +112,8 @@ const getAllProperties = function(options, limit = 10) {
   `;
 
   let clause;
+  const findQueryClause = arr => arr.length === 1 ? clause = 'WHERE' : clause = 'AND';
+
   // 3
   if (options.city) {
     queryParams.push(`%${options.city}%`);
@@ -120,25 +122,25 @@ const getAllProperties = function(options, limit = 10) {
 
   if (options.owner_id) {
     queryParams.push(`%${options.owner_id}%`);
-    queryParams.length === 1 ? clause = 'WHERE' : clause = 'AND';
+    findQueryClause(queryParams);
     queryString += `${clause} owner_id LIKE $${queryParams.length} `;
   }
 
   if (options.minimum_price_per_night) {
     queryParams.push(`${options.minimum_price_per_night}`);
-    queryParams.length === 1 ? clause = 'WHERE' : clause = 'AND';
+    findQueryClause(queryParams);
     queryString += `${clause} cost_per_night >= $${queryParams.length} `;
   }
 
   if (options.maximum_price_per_night) {
     queryParams.push(`${options.maximum_price_per_night}`);
-    queryParams.length === 1 ? clause = 'WHERE' : clause = 'AND';
+    findQueryClause(queryParams);
     queryString += `${clause} cost_per_night <= $${queryParams.length} `;
   }
   
   if (options.minimum_rating) {
     queryParams.push(`${options.minimum_rating}`);
-    queryParams.length === 1 ? clause = 'WHERE' : clause = 'AND';
+    findQueryClause(queryParams);
     queryString += `${clause} rating >= $${queryParams.length} `;
   }
 
