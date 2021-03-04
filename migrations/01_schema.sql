@@ -26,7 +26,7 @@ CREATE TABLE properties (
   , number_of_bedrooms INTEGER NOT NULL DEFAULT 0
 
   , country VARCHAR(255) NOT NULL
-  , streeet VARCHAR(255) NOT NULL
+  , street VARCHAR(255) NOT NULL
   , city VARCHAR(255) NOT NULL
   , province VARCHAR(255) NOT NULL
   , post_code VARCHAR(255) NOT NULL
