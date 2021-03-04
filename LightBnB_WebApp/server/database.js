@@ -17,12 +17,14 @@ const pool = new Pool({
  * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithEmail = function(email) {
-  return pool
-    .query(`
+  const queryString = `
     SELECT *
     FROM users
     WHERE email = $1
-    `, [email])
+    `;
+  
+  return pool
+    .query(queryString, [email])
     .then(res => res.rows[0]);
 };
 exports.getUserWithEmail = getUserWithEmail;
@@ -33,12 +35,14 @@ exports.getUserWithEmail = getUserWithEmail;
  * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithId = function(id) {
-  return pool
-    .query(`
+  const queryString = `
     SELECT *
     FROM users
     WHERE id = $1
-    `, [id])
+    `;
+  
+  return pool
+    .query(queryString, [id])
     .then(res => res.rows[0]);
 };
 exports.getUserWithId = getUserWithId;
@@ -50,12 +54,14 @@ exports.getUserWithId = getUserWithId;
  * @return {Promise<{}>} A promise to the user.
  */
 const addUser =  function(user) {
-  return pool
-    .query(`
+  const queryString = `
     INSERT INTO users (name, email, password) 
     VALUES ($1, $2, $3)
     RETURNING *
-    `, [user.name, user.email, user.password])
+    `;
+  
+  return pool
+    .query(queryString, [user.name, user.email, user.password])
     .then(res => res.rows[0]);
 };
 exports.addUser = addUser;
@@ -77,7 +83,7 @@ const getAllReservations = function(guest_id, limit = 10) {
       AND end_date < now()::date
     GROUP BY properties.id, reservations.id
     ORDER BY start_date
-    LIMIT $2;
+    LIMIT $2
     `;
 
   return pool
@@ -95,12 +101,14 @@ exports.getAllReservations = getAllReservations;
  * @return {Promise<[{}]>}  A promise to the properties.
  */
 const getAllProperties = function(options, limit = 10) {
-  return pool
-    .query(`
+  const queryString = `
     SELECT *
     FROM properties
     LIMIT $1
-    `, [limit])
+    `;
+  
+  return pool
+    .query(queryString, [limit])
     .then(res => res.rows);
 };
 exports.getAllProperties = getAllProperties;
