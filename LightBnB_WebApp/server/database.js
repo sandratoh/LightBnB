@@ -106,7 +106,7 @@ const getAllProperties = function(options, limit = 10) {
   let queryString = `
   SELECT properties.*, avg(property_reviews.rating) as average_rating
   FROM properties
-  JOIN property_reviews ON properties.id = property_id
+  LEFT JOIN property_reviews ON properties.id = property_id
   `;
 
   let clause;
@@ -161,8 +161,6 @@ exports.getAllProperties = getAllProperties;
  * @return {Promise<{}>} A promise to the property.
  */
 const addProperty = function(property) {
-  console.log('Property', property);
-  
   const queryString = `
   INSERT INTO properties (
     owner_id
@@ -204,18 +202,16 @@ const addProperty = function(property) {
     , property.description
     , property.thumbnail_photo_url
     , property.cover_photo_url
-    , Number(property.cost_per_night)
-    , Number(property.parking_spaces)
-    , Number(property.number_of_bathrooms)
-    , Number(property.number_of_bedrooms)
+    , property.cost_per_night
+    , property.parking_spaces
+    , property.number_of_bathrooms
+    , property.number_of_bedrooms
     , property.country
     , property.street
     , property.city
     , property.province
     , property.post_code
   ];
-
-  console.log(queryString, queryParams);
 
   return pool
     .query(queryString, queryParams)
