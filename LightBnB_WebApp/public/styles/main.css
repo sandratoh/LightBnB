@@ -8,7 +8,7 @@
   margin: 20px 0;
   width: 100%;
   max-width: 600px;
-  height: 200px;
+  height: 250px;
   border: 1px solid black;
   box-sizing: border-box;
   display: flex;
@@ -25,6 +25,17 @@
       min-width: 100%;
       height: 100%;
       padding: 0; }
+  .property-listing footer {
+    display: flex;
+    flex-direction: column;
+  }
+  .property-listing form {
+    display: flex;
+    flex-direction: column;
+  }
+  .property-listing .reservation-form-field {
+    display: none;
+  }
 
 @media screen and (max-width: 400px) {
   .property-listing {
