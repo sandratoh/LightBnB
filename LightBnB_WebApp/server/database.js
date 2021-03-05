@@ -90,13 +90,16 @@ exports.getAllReservations = getAllReservations;
  * @param {string} guest_id The id of the user.
  * @return {Promise<[{}]>} A promise to the reservations.
  */
-const makeReservation = function(reservation) {
+const makeReservation = function(reservation, guest_id, property_id) {
   const queryString = `
-    
+    INSERT INTO reservations (start_date, end_date, guest_id, property_id)
+    VALUES ($1, $2, $3, $4)
+    RETURNING *
     `;
 
+  const queryParams = [reservation.start_date, reservation.end_date, guest_id, property_id];
   return db
-    .query(queryString, [ -- ])
+    .query(queryString, queryParams)
     .then(res => res.rows);
 };
 exports.makeReservation = makeReservation;

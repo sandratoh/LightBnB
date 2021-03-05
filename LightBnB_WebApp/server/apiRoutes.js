@@ -25,9 +25,13 @@ module.exports = function(router, database) {
 
   router.post('/reservations', (req, res) => {
     const userId = req.session.userId;
-    database.makeReservation({...req.body, owner_id: userId})
+    // need to set property id cookie after clicking to page
+    // const propertyId = req.session.propertyId;
+    // database.makeReservation({...req.body, guest_id: userId, property_id: propertyId})
+    database.makeReservation({...req.body, guest_id: userId, property_id: 1})
       .then(reservation => {
         res.send(reservation);
+        // req.session.propertyId = null;
       })
       .catch(e => {
         console.error(e);
