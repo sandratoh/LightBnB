@@ -32,5 +32,7 @@ $(() => {
 
   $('body').on('click', '.reservation_button', function() {
     views_manager.show('makeReservation');
+    // how to make app now which property?
+    // req.session.propertyId = property.id;
   });
 });
