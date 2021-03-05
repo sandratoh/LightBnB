@@ -21,23 +21,16 @@ $(() => {
             <div class="property-listing__rating">${Math.round(property.average_rating * 100) / 100}/5 stars</div>
             <div class="property-listing__price">$${property.cost_per_night/100.0}/night</div>
             <br>
-            <form class="reservation-form">
-              <div class="reservation-form-field">
-                <input type="date" name="start_date" placeholder="start date">
-              </div>
-              <div class="reservation-form-field">
-                <input type="date" name="end_date" placeholder="end date">
-              </div>
-              <div class="reservation-form-button">
-                <button>Make Reservation</button>
-              </div>
-            </form>
+            <button class="reservation_button">Make Reservation</button>
             </footer>
         </section>
       </article>
-    `
-  }
+    `;
+  };
 
   window.propertyListing.createListing = createListing;
 
+  $('body').on('click', '.reservation_button', function() {
+    views_manager.show('makeReservation');
+  });
 });
