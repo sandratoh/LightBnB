@@ -215,10 +215,6 @@ const addProperty = function(property) {
 
   return pool
     .query(queryString, queryParams)
-    // .then(res => res.rows[0]);
-    .then(res => {
-      console.log(res.rows[0]);
-      return res.rows[0];
-    });
+    .then(res => res.rows[0]);
 };
 exports.addProperty = addProperty;
