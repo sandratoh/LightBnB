@@ -29,7 +29,7 @@ $(() => {
                 <input type="date" name="end_date" placeholder="end date">
               </div>
               <div class="reservation-form-button">
-                <button type="submit">Make Reservation</button>
+                <button>Make Reservation</button>
               </div>
             </form>
             </footer>
