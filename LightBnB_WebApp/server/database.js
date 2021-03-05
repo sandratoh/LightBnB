@@ -85,6 +85,22 @@ const getAllReservations = function(guest_id, limit = 10) {
 };
 exports.getAllReservations = getAllReservations;
 
+/**
+ * Create new reservation for a single user.
+ * @param {string} guest_id The id of the user.
+ * @return {Promise<[{}]>} A promise to the reservations.
+ */
+const makeReservation = function(reservation) {
+  const queryString = `
+    
+    `;
+
+  return db
+    .query(queryString, [ -- ])
+    .then(res => res.rows);
+};
+exports.makeReservation = makeReservation;
+
 /// Properties
 
 /**
