@@ -28,6 +28,14 @@ function signUp(data) {
   });
 }
 
+function makeReservation(data) {
+  return $.ajax({
+    method: "POST",
+    url: "/api/reservations",
+    data
+  });
+}
+
 function getAllListings(params) {
   let url = "/api/properties";
   if (params) {
