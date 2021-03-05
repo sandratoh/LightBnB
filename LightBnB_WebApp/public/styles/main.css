@@ -30,16 +30,9 @@
     display: flex;
     flex-direction: column;
   }
-  .property-listing form {
-    display: flex;
-    flex-direction: column;
-  }
-  .property-listing .reservation-form-field {
-    margin-bottom: 5px;
-  }
 
-.hide {
-  display: none;
+.reservation-form-field {
+  margin-bottom: 8px;
 }
 
 @media screen and (max-width: 400px) {
